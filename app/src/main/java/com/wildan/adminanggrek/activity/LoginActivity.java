@@ -1,4 +1,4 @@
-package com.wildan.adminanggrek;
+package com.wildan.adminanggrek.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.wildan.adminanggrek.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Login Sukses", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
         else if ((username.matches("")||password.matches("")))

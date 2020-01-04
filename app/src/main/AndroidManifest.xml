@@ -9,16 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProdukActivity"
-            android:parentActivityName=".MainActivity"
+        <activity android:name=".activity.TambahProdukActivity"
+            android:parentActivityName=".activity.MainActivity"
             android:theme="@style/GoodTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
-        <activity android:name=".CrudActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.ProdukActivity"
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/GoodTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

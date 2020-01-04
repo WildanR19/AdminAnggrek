@@ -1,19 +1,13 @@
-package com.wildan.adminanggrek;
+package com.wildan.adminanggrek.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.wildan.adminanggrek.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         tambahpd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, CrudActivity.class);
+                Intent i = new Intent(MainActivity.this, TambahProdukActivity.class);
                 startActivity(i);
             }
         });
