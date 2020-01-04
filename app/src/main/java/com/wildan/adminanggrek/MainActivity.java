@@ -17,18 +17,47 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnproduk;
+    RelativeLayout tambahpd, listpd, jual, logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnproduk = (Button) findViewById(R.id.btnproduk);
-        btnproduk.setOnClickListener(new View.OnClickListener() {
+        tambahpd = (RelativeLayout) findViewById(R.id.produk);
+        listpd = (RelativeLayout) findViewById(R.id.listproduk);
+        jual = (RelativeLayout) findViewById(R.id.penjualan);
+        logout = (RelativeLayout) findViewById(R.id.logout);
+
+        tambahpd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,ProdukActivity.class);
+                Intent i = new Intent(MainActivity.this, CrudActivity.class);
                 startActivity(i);
+            }
+        });
+
+        listpd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, ProdukActivity.class);
+                startActivity(i);
+            }
+        });
+
+        jual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent i = new Intent(MainActivity.this, PenjualanActivity.class);
+                startActivity();*/
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

@@ -6,13 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;;
+import com.squareup.picasso.Picasso;
+
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.anggrekViewHolder> {
     private ArrayList<Anggrek> anggreks;
+    private Context konteks;
+
+    Locale localeID = new Locale("in", "ID");
+    NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
     public RecycleAdapter(ArrayList<Anggrek> anggreks){
         this.anggreks=anggreks;
@@ -28,7 +37,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.anggrekV
     @Override
     public void onBindViewHolder(RecycleAdapter.anggrekViewHolder holder, int position) {
         holder.jdl.setText(anggreks.get(position).getJudul());
-        holder.hrg.setText(anggreks.get(position).getHarga());
+        holder.hrg.setText(String.valueOf(formatRupiah.format(anggreks.get(position).getHarga())));
+        Picasso.with(konteks).load(anggreks.get(position).getGambar()).resize(240, 240).into(holder.img_produk);
     }
 
     @Override
@@ -38,8 +48,8 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.anggrekV
 
     public class anggrekViewHolder extends RecyclerView.ViewHolder {
         TextView jdl,hrg;
+        public ImageView img_produk;
         Button btn;
-        Context konteks;
         public String KEY_JDL = "judul";
         public String KEY_HRG = "harga";
 
@@ -48,6 +58,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.anggrekV
             jdl = (TextView) itemView.findViewById(R.id.Judul);
             hrg = (TextView) itemView.findViewById(R.id.harga);
             btn = (Button) itemView.findViewById(R.id.book);
+            img_produk = (ImageView)itemView.findViewById(R.id.gbproduk);
 
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
