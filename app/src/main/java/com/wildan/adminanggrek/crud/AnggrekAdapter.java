@@ -1,5 +1,7 @@
 package com.wildan.adminanggrek.crud;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,36 +16,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class AnggrekAdapter extends RecyclerView.Adapter<AnggrekAdapter.AnggrekViewHolder> {
-    private List<Anggrek> AnggrekList = new ArrayList<>();
-    RecyclerItemClickListener clickListener;
+public class AnggrekAdapter extends RecyclerView.Adapter<MyHolder> {
+    //private List<Anggrek> AnggrekList = new ArrayList<>();
+    ArrayList<Anggrek> AnggrekList;
+    Context c;
     //Locale localeID = new Locale("in", "ID");
     //NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
 
-    public AnggrekAdapter(List<Anggrek> AnggrekList) {
+    public AnggrekAdapter(Context context, ArrayList<Anggrek> AnggrekList) {
+        this.c=context;
         this.AnggrekList = AnggrekList;
     }
 
     @Override
-    public AnggrekViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        return new AnggrekViewHolder(view);
+        MyHolder holder = new MyHolder(view);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(AnggrekViewHolder holder, final int position) {
-
-        holder.txt_resultnama.setText(AnggrekList.get(position).getNama());
-        holder.txt_resultharga.setText(AnggrekList.get(position).getHarga());
-
-        DBHandler dbHandler = new DBHandler(this);
-        holder.btn_hapus.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(MyHolder holder, int position) {
+        holder.nama.setText(AnggrekList.get(position).getNama());
+        holder.harga.setText(AnggrekList.get(position).getHarga());
+        holder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(View view) {
-                list.remove(position);
-                Anggrek.remove(position);
-                notifyItemRemoved(position);
-                dbHandler.hapusDataAnggrek(position);
+            public void onItemClick(View v, int pos) {
+                Intent i = new Intent(c,EditProduk.class);
+
+                i.putExtra("NAMA", AnggrekList.get(pos).getNama());
+                i.putExtra("HARGA", AnggrekList.get(pos).getHarga());
+                i.putExtra("ID", AnggrekList.get(pos).getId());
+
+                c.startActivity(i);
             }
         });
     }
@@ -51,22 +56,5 @@ public class AnggrekAdapter extends RecyclerView.Adapter<AnggrekAdapter.AnggrekV
     @Override
     public int getItemCount() {
         return AnggrekList.size();
-    }
-
-    public static class AnggrekViewHolder extends RecyclerView.ViewHolder {
-
-        TextView txt_resultnama, txt_resultharga, btn_hapus;
-
-        public AnggrekViewHolder(View itemView) {
-            super(itemView);
-            btn_hapus = (TextView) itemView.findViewById(R.id.btn_hapus);
-            txt_resultnama = (TextView) itemView.findViewById(R.id.nama);
-            txt_resultharga = (TextView) itemView.findViewById(R.id.harga);
-        }
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
     }
 }

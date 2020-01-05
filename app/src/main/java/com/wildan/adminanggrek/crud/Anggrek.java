@@ -5,12 +5,10 @@ public class Anggrek {
     private String nama;
     private String harga;
 
-    public Anggrek() {
-    }
-
-    public Anggrek(String nama, String harga) {
+    public Anggrek(String nama, String harga, int id) {
         this.nama = nama;
         this.harga = harga;
+        this.id=id;
     }
 
     public int getId() {
@@ -33,7 +31,7 @@ public class Anggrek {
         return harga;
     }
 
-    public void setHarga(String harga){
+    public void setHarga(String harga) {
         this.harga = harga;
     }
 }
